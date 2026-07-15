@@ -1,27 +1,15 @@
 import { useState } from 'react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { BookModal } from '../components/BookModal';
-import booksData from '../../data/books.json';
-
-interface Book {
-  id: string;
-  title: string;
-  author: string;
-  genre: string;
-  year: number;
-  rating: number;
-  description: string;
-  summary: string;
-  image: string;
-}
+import { useCatalog } from '../state/CatalogContext';
+import type { Book } from '../state/types';
 
 export function Catalog() {
   const [selectedGenre, setSelectedGenre] = useState('All');
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const { books } = useCatalog();
 
-  const genres = ['All', 'Mystery & Thriller', 'Science Fiction', 'Literary Fiction', 'Historical Fiction', 'Romance', 'Non-Fiction'];
-
-  const books: Book[] = booksData;
+  const genres = ['All', ...Array.from(new Set(books.map((book) => book.genre)))];
 
   const filteredBooks = books.filter(book => {
     const matchesGenre = selectedGenre === 'All' || book.genre === selectedGenre;
@@ -89,7 +77,10 @@ export function Catalog() {
                       {book.title}
                     </h3>
                     <p className="text-sm text-muted-foreground">{book.author}</p>
-                    <p className="text-xs text-muted-foreground/60">{book.year}</p>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground/60">
+                      <span>{book.year}</span>
+                      {book.formats.digital && <span>From ${book.formats.digital.price.toFixed(2)}</span>}
+                    </div>
                   </div>
                 </div>
               ))}

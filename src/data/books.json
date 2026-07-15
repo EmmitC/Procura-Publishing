@@ -1,101 +1,107 @@
 [
   {
-    "id": "the-silent-echo",
-    "title": "The Silent Echo",
-    "author": "Margaret Atwell",
-    "genre": "Mystery & Thriller",
+    "id": "dead-dreams-are-alive",
+    "title": "Dead Dreams Are Alive",
+    "author": "Jasper Okedi",
+    "genre": "Poetry",
     "year": 2024,
-    "rating": 4.7,
-    "description": "A gripping psychological thriller that keeps you guessing until the final page.",
-    "summary": "Detective Sarah Chen returns to her coastal hometown after a decade away, only to find herself hunting a serial killer who targets victims with uncanny precision. As the investigation deepens, Sarah discovers disturbing connections to a case that destroyed her career—and her family. The Silent Echo masterfully weaves past and present into a taut narrative that explores memory, trauma, and the price of truth.",
-    "image": "https://images.unsplash.com/photo-1648536524290-590fb42a04aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwdWJsaXNoaW5nJTIwYm9va3MlMjBsaWJyYXJ5fGVufDF8fHx8MTc3MjYyMDA5OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-  },
-  {
-    "id": "beyond-the-horizon",
-    "title": "Beyond the Horizon",
-    "author": "David Chen",
-    "genre": "Science Fiction",
-    "year": 2024,
-    "rating": 4.5,
-    "description": "An epic space odyssey exploring humanity's place in the cosmos.",
-    "summary": "In 2287, humanity's first interstellar expedition encounters an ancient alien structure that rewrites everything we know about the universe. Commander Elena Vasquez must navigate first contact protocols while uncovering the truth about humanity's place in a cosmos far stranger than imagined. Chen's masterwork combines hard science fiction with profound philosophical inquiry, asking what it means to be human in an infinite universe.",
-    "image": "https://images.unsplash.com/photo-1739301674047-386ed15c7e16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib29rJTIwc2hlbGYlMjBwcm9mZXNzaW9uYWx8ZW58MXx8fHwxNzcyNjIwMDk4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-  },
-  {
-    "id": "whispers-of-tomorrow",
-    "title": "Whispers of Tomorrow",
-    "author": "Sarah Williams",
-    "genre": "Literary Fiction",
-    "year": 2023,
     "rating": 4.8,
-    "description": "A profound exploration of family, memory, and the stories that define us.",
-    "summary": "Three generations of women gather at their ancestral home for what may be the last summer together. Through shifting perspectives and lyrical prose, Williams examines how family stories shape identity, how memory fails and preserves us, and how the past whispers its way into every tomorrow. A meditation on inheritance—both the burdens and gifts we pass down.",
-    "image": "https://images.unsplash.com/photo-1639916765637-43de505e45a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3cml0aW5nJTIwZGVzayUyMGF1dGhvcnxlbnwxfHx8fDE3NzI2MjAwOTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+    "description": "This is part of a poetry book series (Book 1). All my poetry is to empower each member of the family unit to fulfill their individual roles. The man is called to be the Provider & Protector, as the woman is meant to be the Receiver, Nurturer & Encourager mainly.",
+    "summary": "This is part of a poetry book series (Book 1). All my poetry is to empower each member of the family unit to fulfill their individual roles. The man is called to be the Provider & Protector, as the woman is meant to be the Receiver, Nurturer & Encourager mainly.",
+    "image": "/books/dead-dreams-are-alive.jpg",
+    "formats": {
+      "digital": { "price": 19.99 },
+      "physical": { "price": 19.99, "stock": 12 }
+    }
   },
   {
-    "id": "the-last-emperor",
-    "title": "The Last Emperor",
-    "author": "James Morrison",
-    "genre": "Historical Fiction",
-    "year": 2023,
-    "rating": 4.6,
-    "description": "A sweeping historical epic set during the fall of the Roman Empire.",
-    "summary": "476 AD. As barbarian armies mass at the gates of Rome, the last Western Roman Emperor, Romulus Augustulus, witnesses the end of an empire that ruled for a millennium. Morrison brings meticulous research and vivid storytelling to this pivotal moment in history, exploring themes of power, legacy, and civilizational collapse that resonate eerily with our own time.",
-    "image": "https://images.unsplash.com/photo-1718220216044-006f43e3a9b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBvZmZpY2UlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzcyNTQzMzEzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-  },
-  {
-    "id": "hearts-in-bloom",
-    "title": "Hearts in Bloom",
-    "author": "Elena Rodriguez",
-    "genre": "Romance",
+    "id": "did-we-die",
+    "title": "Did We Die?",
+    "author": "Jasper Okedi",
+    "genre": "Poetry / Social Commentary",
     "year": 2024,
-    "rating": 4.4,
-    "description": "A heartwarming tale of second chances and finding love when you least expect it.",
-    "summary": "Maya Santos returns to her grandmother's flower shop after a devastating divorce, determined to rebuild her life one arrangement at a time. When landscape architect James Chen arrives to redesign the neighborhood park, their professional collaboration blooms into something neither expected. Rodriguez crafts a tender, emotionally intelligent romance that honors the complexity of starting over.",
-    "image": "https://images.unsplash.com/photo-1648536524290-590fb42a04aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwdWJsaXNoaW5nJTIwYm9va3MlMjBsaWJyYXJ5fGVufDF8fHx8MTc3MjYyMDA5OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-  },
-  {
-    "id": "the-digital-age",
-    "title": "The Digital Age",
-    "author": "Michael Foster",
-    "genre": "Non-Fiction",
-    "year": 2023,
-    "rating": 4.3,
-    "description": "An insightful analysis of technology's impact on modern society.",
-    "summary": "Technology journalist Michael Foster delivers a nuanced examination of how digital technology has reshaped human connection, work, and democracy. Drawing on extensive interviews and research, Foster moves beyond dystopian panic and utopian hype to offer a clear-eyed assessment of the digital revolution's promises and perils. Essential reading for understanding our contemporary moment.",
-    "image": "https://images.unsplash.com/photo-1739301674047-386ed15c7e16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib29rJTIwc2hlbGYlMjBwcm9mZXNzaW9uYWx8ZW58MXx8fHwxNzcyNjIwMDk4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-  },
-  {
-    "id": "shadows-at-midnight",
-    "title": "Shadows at Midnight",
-    "author": "Margaret Atwell",
-    "genre": "Mystery & Thriller",
-    "year": 2022,
     "rating": 4.6,
-    "description": "A detective must solve a series of mysterious disappearances in a small coastal town.",
-    "summary": "When three women vanish from the quiet town of Crescent Bay within a single month, Detective Marcus Webb discovers that small-town secrets run deeper than the ocean itself. Each disappearance points to a decades-old pattern that the town has been desperate to forget. Atwell's atmospheric thriller explores the dark undercurrents of community and the lengths people will go to protect their own.",
-    "image": "https://images.unsplash.com/photo-1639916765637-43de505e45a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3cml0aW5nJTIwZGVzayUyMGF1dGhvcnxlbnwxfHx8fDE3NzI2MjAwOTl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+    "description": "This is part of a poetry book series (Book 2). All my poetry is to empower each member of the family unit to fulfill their individual roles. The man is called to be the Provider & Protector, as the woman is meant to be the Receiver, Nurturer & Encourager mainly.",
+    "summary": "This is part of a poetry book series (Book 2). All my poetry is to empower each member of the family unit to fulfill their individual roles. The man is called to be the Provider & Protector, as the woman is meant to be the Receiver, Nurturer & Encourager mainly.",
+    "image": "/books/did-we-die.jpg",
+    "formats": {
+      "digital": { "price": 17.99 },
+      "physical": { "price": 17.99, "stock": 12 }
+    }
   },
   {
-    "id": "quantum-dreams",
-    "title": "Quantum Dreams",
-    "author": "David Chen",
-    "genre": "Science Fiction",
-    "year": 2023,
+    "id": "secrets-carried-by-the-wind",
+    "title": "Secrets Carried by the Wind",
+    "author": "Jasper Okedi",
+    "genre": "Poetry / Inspirational",
+    "year": 2024,
+    "rating": 4.6,
+    "description": "This is part of a poetry book series (Book 3). All my poetry is to empower each member of the family unit to fulfill their individual roles. The man is called to be the Provider & Protector, as the woman is meant to be the Receiver, Nurturer & Encourager mainly.",
+    "summary": "This is part of a poetry book series (Book 3). All my poetry is to empower each member of the family unit to fulfill their individual roles. The man is called to be the Provider & Protector, as the woman is meant to be the Receiver, Nurturer & Encourager mainly.",
+    "image": "/books/secrets-carried-by-the-wind.jpg",
+    "formats": {
+      "digital": { "price": 21.50 },
+      "physical": { "price": 21.50, "stock": 12 }
+    }
+  },
+  {
+    "id": "threads-of-time",
+    "title": "Threads of Time",
+    "author": "Jasper Okedi",
+    "genre": "Poetry / Family",
+    "year": 2024,
     "rating": 4.7,
-    "description": "Reality becomes fluid in this mind-bending exploration of parallel universes.",
-    "summary": "Physicist Dr. Amara Singh's breakthrough in quantum computing accidentally opens a window to parallel realities—and some of those realities want in. As the barriers between worlds begin to collapse, Amara must navigate versions of herself, each having made different choices, to prevent a catastrophic multiversal collision. Chen delivers a thought-provoking exploration of choice, consequence, and the paths not taken.",
-    "image": "https://images.unsplash.com/photo-1718220216044-006f43e3a9b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBvZmZpY2UlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzcyNTQzMzEzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+    "description": "This is part of a poetry book series (Book 4). All my poetry is to empower each member of the family unit to fulfill their individual roles. The man is called to be the Provider & Protector, as the woman is meant to be the Receiver, Nurturer & Encourager mainly.",
+    "summary": "This is part of a poetry book series (Book 4). All my poetry is to empower each member of the family unit to fulfill their individual roles. The man is called to be the Provider & Protector, as the woman is meant to be the Receiver, Nurturer & Encourager mainly.",
+    "image": "/books/threads-of-time.jpg",
+    "formats": {
+      "digital": { "price": 24.99 },
+      "physical": { "price": 24.99, "stock": 12 }
+    }
   },
   {
-    "id": "the-garden-path",
-    "title": "The Garden Path",
-    "author": "Sarah Williams",
-    "genre": "Literary Fiction",
+    "id": "love-and-lavender",
+    "title": "Love & Lavender",
+    "author": "Jasper Okedi",
+    "genre": "Romantic Poetry",
     "year": 2022,
-    "rating": 4.5,
-    "description": "A lyrical meditation on loss, resilience, and the power of nature to heal.",
-    "summary": "After her husband's death, botanist Claire Morrison retreats to a neglected Victorian garden, intending to restore it to its former glory. As she works the soil and coaxes life from dormant seeds, she begins to tend to her own grief. Williams weaves horticultural knowledge with profound emotional insight, creating a story about the cyclical nature of life, death, and renewal.",
-    "image": "https://images.unsplash.com/photo-1648536524290-590fb42a04aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwdWJsaXNoaW5nJTIwYm9va3MlMjBsaWJyYXJ5fGVufDF8fHx8MTc3MjYyMDA5OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+    "rating": 4.8,
+    "description": "This is the first of a collection of a “ten poetry book series” of intimate expressions exchanged between Akim & Akipi. The masculine spirit of Akim sings from the position of leadership and security; The feminine spirit of Akipi sings as one in the anchoring of feminine submission.",
+    "summary": "This is the first of a collection of a “ten poetry book series” of intimate expressions exchanged between Akim & Akipi. The masculine spirit of Akim sings from the position of leadership and security; The feminine spirit of Akipi sings as one in the anchoring of feminine submission.",
+    "image": "/books/love-and-lavender.jpg",
+    "formats": {
+      "digital": { "price": 9.99 },
+      "physical": { "price": 9.99, "stock": 12 }
+    }
+  },
+  {
+    "id": "hearts-are-thieves",
+    "title": "Hearts Are Thieves",
+    "author": "Jasper Okedi",
+    "genre": "Poetry / Inspirational",
+    "year": 2025,
+    "rating": 4.7,
+    "description": "Part of Jasper Okedi's ongoing poetry series exploring family, identity, and the roles each member is called to fulfill.",
+    "summary": "Part of Jasper Okedi's ongoing poetry series exploring family, identity, and the roles each member is called to fulfill.",
+    "image": "/books/hearts-are-thieves.jpg",
+    "formats": {
+      "digital": { "price": 9.99 },
+      "physical": { "price": 9.99, "stock": 12 }
+    }
+  },
+  {
+    "id": "souls-soliloquy-issue-1",
+    "title": "Souls Soliloquy (Issue #1)",
+    "author": "Procura Publishing",
+    "genre": "Literary Magazine",
+    "year": 2025,
+    "rating": 4.6,
+    "description": "Dive into the inaugural issue of 'Souls Soliloquy,' a literary magazine by Procura Publishing. This edition features a curated selection of contemporary poetry, short stories, and thought-provoking essays from emerging and established writers. Explore themes of identity, resilience, and the human experience through diverse voices and perspectives. 'Souls Soliloquy' is your gateway to discovering fresh literary talent and engaging narratives that resonate with the soul.",
+    "summary": "Dive into the inaugural issue of 'Souls Soliloquy,' a literary magazine by Procura Publishing. This edition features a curated selection of contemporary poetry, short stories, and thought-provoking essays from emerging and established writers. Explore themes of identity, resilience, and the human experience through diverse voices and perspectives. 'Souls Soliloquy' is your gateway to discovering fresh literary talent and engaging narratives that resonate with the soul.",
+    "image": "/magazines/souls-soliloquy-issue-1.jpg",
+    "formats": {
+      "digital": { "price": 9.99 },
+      "physical": { "price": 9.99, "stock": 12 }
+    }
   }
 ]

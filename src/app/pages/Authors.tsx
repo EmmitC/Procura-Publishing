@@ -1,38 +1,9 @@
 import { ArrowRight } from 'lucide-react';
+import { usePeople } from '../state/PeopleContext';
+import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 export function Authors() {
-  const authors = [
-    {
-      name: 'Margaret Atwell',
-      genre: 'Mystery & Thriller',
-      recognition: 'Edgar Award',
-    },
-    {
-      name: 'David Chen',
-      genre: 'Science Fiction',
-      recognition: 'Hugo Award',
-    },
-    {
-      name: 'Sarah Williams',
-      genre: 'Literary Fiction',
-      recognition: 'Pulitzer Prize',
-    },
-    {
-      name: 'James Morrison',
-      genre: 'Historical Fiction',
-      recognition: 'National Book Award',
-    },
-    {
-      name: 'Elena Rodriguez',
-      genre: 'Contemporary Romance',
-      recognition: 'RITA Award',
-    },
-    {
-      name: 'Michael Foster',
-      genre: 'Non-Fiction',
-      recognition: 'Critics Circle Award',
-    },
-  ];
+  const { authors } = usePeople();
 
   return (
     <div className="bg-background">
@@ -55,16 +26,21 @@ export function Authors() {
       <section className="py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-20">
-            {authors.map((author, index) => (
-              <div key={index} className="group">
+            {authors.map((author) => (
+              <div key={author.id} className="group">
                 <div className="aspect-[3/4] mb-6 bg-muted overflow-hidden">
-                  <div className="w-full h-full bg-gradient-to-br from-muted to-muted/50"></div>
+                  {author.image ? (
+                    <ImageWithFallback src={author.image} alt={author.name} className="w-full h-full object-cover grayscale" />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-muted to-muted/50"></div>
+                  )}
                 </div>
                 <h3 className="text-2xl mb-2 text-secondary" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
                   {author.name}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-1">{author.genre}</p>
-                <p className="text-xs text-primary">{author.recognition}</p>
+                <p className="text-sm text-muted-foreground mb-1">{author.title}</p>
+                {author.recognition && <p className="text-xs text-primary">{author.recognition}</p>}
+                {author.bio && <p className="text-sm text-muted-foreground leading-relaxed mt-3">{author.bio}</p>}
               </div>
             ))}
           </div>
@@ -77,20 +53,20 @@ export function Authors() {
           <div className="grid md:grid-cols-2 gap-20">
             <div className="space-y-8">
               <p className="text-2xl text-secondary leading-relaxed" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-                "DOMINARI believed in my vision and helped me refine it into something far more resonant than I had imagined."
+                "All my poetry is to empower each member of the family unit to fulfill their individual roles. The man is called to be the Provider & Protector, as the woman is meant to be the Receiver, Nurturer & Encourager mainly."
               </p>
               <div>
-                <p className="text-sm text-muted-foreground">Sarah Williams</p>
-                <p className="text-xs text-muted-foreground/60">Author, Whispers of Tomorrow</p>
+                <p className="text-sm text-muted-foreground">Jasper Okedi</p>
+                <p className="text-xs text-muted-foreground/60">Author, Dead Dreams Are Alive</p>
               </div>
             </div>
             <div className="space-y-8">
               <p className="text-2xl text-secondary leading-relaxed" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-                "The editorial team's attention to detail and commitment to excellence is evident in every title they publish."
+                "This is the first of a collection of a 'ten poetry book series' of intimate expressions exchanged between Akim & Akipi. The masculine spirit of Akim sings from the position of leadership and security; the feminine spirit of Akipi sings as one in the anchoring of feminine submission."
               </p>
               <div>
-                <p className="text-sm text-muted-foreground">David Chen</p>
-                <p className="text-xs text-muted-foreground/60">Author, Beyond the Horizon</p>
+                <p className="text-sm text-muted-foreground">Jasper Okedi</p>
+                <p className="text-xs text-muted-foreground/60">Author, Love & Lavender</p>
               </div>
             </div>
           </div>
@@ -101,11 +77,34 @@ export function Authors() {
       <section className="py-32">
         <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center">
           <p className="text-3xl md:text-4xl text-secondary leading-relaxed mb-8" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-            "My writing is built on dialogue poetry—structured to guide both men and women toward clarity in who they are and how they relate. It speaks to identity, responsibility, and the natural order of connection."
+            "My writing is meant to achieve the above using “dialogue poetry”, to lead both men and women into their true roles. The man embraces the masculine while the woman embraces the feminine. The man leads the woman while she submits. This is the proper way of relationship function."
           </p>
           <div>
             <p className="text-sm tracking-wider uppercase text-muted-foreground">Jasper Okedi</p>
-            <p className="text-xs text-muted-foreground/60 mt-1">Author</p>
+            <p className="text-xs text-muted-foreground/60 mt-1">Founder & Author</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Interview */}
+      <section className="border-y border-border py-32 bg-card">
+        <div className="max-w-5xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <p className="text-sm tracking-wider uppercase text-muted-foreground mb-4">In Conversation</p>
+            <h2 className="text-4xl md:text-5xl text-secondary" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+              Watch the Interview
+            </h2>
+          </div>
+          <div className="relative w-full aspect-video border border-border overflow-hidden">
+            <iframe
+              className="absolute inset-0 w-full h-full"
+              src="https://www.youtube.com/embed/VZYH3EMHSPE?si=kN_K-rNyQDKNyjGx"
+              title="YouTube video player"
+              frameBorder={0}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
           </div>
         </div>
       </section>

@@ -3,24 +3,12 @@ import { Link } from 'react-router';
 import { ArrowRight } from 'lucide-react';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 import { BookModal } from '../components/BookModal';
-import booksData from '../../data/books.json';
-
-interface Book {
-  id: string;
-  title: string;
-  author: string;
-  genre: string;
-  year: number;
-  rating: number;
-  description: string;
-  summary: string;
-  image: string;
-}
+import { useCatalog } from '../state/CatalogContext';
+import type { Book } from '../state/types';
 
 export function Home() {
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-
-  const books: Book[] = booksData;
+  const { books } = useCatalog();
   const featuredBooks = books.slice(0, 3);
 
   return (
@@ -59,14 +47,14 @@ export function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="text-sm tracking-wider uppercase text-muted-foreground mb-4">About DOMINARI</p>
+              <p className="text-sm tracking-wider uppercase text-muted-foreground mb-4">About PROCURA</p>
               <h2 className="text-4xl md:text-5xl mb-6 text-secondary" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
                 Literary Curation, Not Mass Production
               </h2>
             </div>
             <div className="space-y-6 text-muted-foreground leading-relaxed">
               <p>
-                Founded in 2019, DOMINARI emerged to solve a problem: remarkable manuscripts were disappearing into the noise of mass publishing. Readers couldn't find their next obsession. Authors felt disconnected from their audience.
+                Founded in 2019, PROCURA emerged to solve a problem: remarkable manuscripts were disappearing into the noise of mass publishing. Readers couldn't find their next obsession. Authors felt disconnected from their audience.
               </p>
               <p>
                 We operate as a literary curator—choosing every book for its craft, originality, and power to transform. Not its commercial potential alone.

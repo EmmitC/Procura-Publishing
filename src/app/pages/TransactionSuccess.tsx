@@ -1,15 +1,18 @@
-import { useLocation, useNavigate, Link } from 'react-router';
-import { CheckCircle2, Download, Mail, ArrowRight } from 'lucide-react';
+import { useLocation, Link, Navigate } from 'react-router';
+import { CheckCircle2, Download, Mail, ArrowRight, BookOpen } from 'lucide-react';
+import { useOrders } from '../state/OrdersContext';
 
 export function TransactionSuccess() {
-  const navigate = useNavigate();
-  const { state } = useLocation() as { state: { total?: number; method?: string } | null };
-  const total = state?.total ?? 56.16;
-  const method = state?.method ?? 'visa';
+  const { state } = useLocation() as { state: { orderId?: string } | null };
+  const { getOrder } = useOrders();
+  const order = state?.orderId ? getOrder(state.orderId) : undefined;
 
-  const refId = `PRO-${Date.now().toString(36).toUpperCase().slice(-8)}`;
+  if (!order) {
+    return <Navigate to="/catalog" replace />;
+  }
 
-  const methodLabel = method === 'bank' ? 'Bank Transfer' : method === 'mastercard' ? 'Mastercard' : 'Visa';
+  const methodLabel = order.paymentMethod === 'bank' ? 'Bank Transfer' : order.paymentMethod === 'mastercard' ? 'Mastercard' : 'Visa';
+  const hasDigital = order.items.some((i) => i.format === 'digital');
 
   return (
     <div className="bg-background min-h-screen">
@@ -37,11 +40,13 @@ export function TransactionSuccess() {
           <div className="space-y-4 mb-8 pb-8 border-b border-border">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Reference</span>
-              <span className="text-secondary font-mono text-xs tracking-widest">{refId}</span>
+              <span className="text-secondary font-mono text-xs tracking-widest">{order.id}</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Date</span>
-              <span className="text-secondary">{new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+              <span className="text-secondary">
+                {new Date(order.createdAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+              </span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Payment Method</span>
@@ -49,15 +54,26 @@ export function TransactionSuccess() {
             </div>
           </div>
 
+          <div className="space-y-3 mb-8 pb-8 border-b border-border">
+            {order.items.map((item, i) => (
+              <div key={i} className="flex justify-between text-sm">
+                <span className="text-muted-foreground">
+                  {item.title} {item.quantity > 1 && `× ${item.quantity}`} — {item.format === 'digital' ? 'Digital' : 'Physical'}
+                </span>
+                <span className="text-secondary">${(item.price * item.quantity).toFixed(2)}</span>
+              </div>
+            ))}
+          </div>
+
           <div className="flex justify-between items-center mb-8 pb-8 border-b border-border">
             <span className="text-sm tracking-wider uppercase text-secondary">Amount Paid</span>
-            <span className="text-3xl text-secondary" style={{ fontFamily: 'Cormorant Garamond, serif' }}>${total.toFixed(2)}</span>
+            <span className="text-3xl text-secondary" style={{ fontFamily: 'Cormorant Garamond, serif' }}>${order.total.toFixed(2)}</span>
           </div>
 
           {/* Direct bank note */}
           <div className="bg-muted/50 p-4">
             <p className="text-[10px] text-muted-foreground tracking-wide leading-relaxed">
-              ${total.toFixed(2)} has been remitted directly to the author's verified bank account by Procura™. The author will receive funds within 1–3 business days.
+              ${order.total.toFixed(2)} has been remitted directly to the author's verified bank account by Procura™. The author will receive funds within 1–3 business days.
             </p>
           </div>
         </div>
@@ -79,6 +95,18 @@ export function TransactionSuccess() {
             Email Receipt
           </button>
         </div>
+
+        {hasDigital && (
+          <div className="mb-12">
+            <Link
+              to="/library"
+              className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-secondary text-background hover:bg-primary transition-colors text-sm tracking-wider uppercase"
+            >
+              <BookOpen className="h-4 w-4" strokeWidth={1.5} />
+              Go to My Library
+            </Link>
+          </div>
+        )}
 
         <div className="text-center border-t border-border pt-8">
           <Link

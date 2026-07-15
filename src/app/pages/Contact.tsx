@@ -1,20 +1,33 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { toast } from 'sonner';
+import { useMessages } from '../state/MessagesContext';
+import { useAuth } from '../state/AuthContext';
+import { useSiteSettings } from '../state/SiteSettingsContext';
+import type { MessageSubject } from '../state/types';
 
 export function Contact() {
+  const { submitMessage } = useMessages();
+  const { user } = useAuth();
+  const { settings } = useSiteSettings();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    name: user?.name ?? '',
+    email: user?.email ?? '',
     subject: '',
     message: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    submitMessage({
+      userId: user?.id ?? null,
+      name: formData.name,
+      email: formData.email,
+      subject: (formData.subject || 'other') as MessageSubject,
+      message: formData.message,
+    });
+    toast.success('Message sent', { description: 'Thank you for reaching out — we will get back to you soon.' });
+    setFormData({ name: user?.name ?? '', email: user?.email ?? '', subject: '', message: '' });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -132,18 +145,16 @@ export function Contact() {
               <div>
                 <h3 className="text-sm tracking-wider uppercase text-muted-foreground mb-6">Location</h3>
                 <p className="text-secondary leading-relaxed">
-                  123 Publishing Avenue<br />
-                  New York, NY 10001<br />
-                  United States
+                  {settings.location}
                 </p>
               </div>
 
               <div>
                 <h3 className="text-sm tracking-wider uppercase text-muted-foreground mb-6">Contact</h3>
                 <div className="space-y-3 text-secondary">
-                  <p>(555) 123-4567</p>
-                  <p>info@dominari.com</p>
-                  <p>submissions@dominari.com</p>
+                  <p>{settings.phone}</p>
+                  <p>{settings.primaryEmail}</p>
+                  {settings.secondaryEmail && <p>{settings.secondaryEmail}</p>}
                 </div>
               </div>
 

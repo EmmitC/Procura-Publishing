@@ -1,26 +1,49 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Lock, CreditCard, Shield, ChevronRight, Check } from 'lucide-react';
-
-const orderItems = [
-  { id: '1', title: 'The Architecture of Silence', author: 'Hood Lubowa', price: 28.00 },
-  { id: '2', title: 'Meridian Crossings', author: 'Jasper Okedi', price: 24.00 },
-];
+import { Lock, CreditCard, Shield, ChevronRight, Check, Mail } from 'lucide-react';
+import { useCart } from '../state/CartContext';
+import { useCatalog } from '../state/CatalogContext';
+import { useAuth } from '../state/AuthContext';
+import { useOrders } from '../state/OrdersContext';
+import type { OrderItem } from '../state/types';
 
 export function Checkout() {
   const navigate = useNavigate();
+  const { items, hasDigitalItem, clear } = useCart();
+  const { getBook, decrementPhysicalStock } = useCatalog();
+  const { user } = useAuth();
+  const { createOrder, setOrderStatus } = useOrders();
+
   const [paymentMethod, setPaymentMethod] = useState<'visa' | 'mastercard' | 'bank'>('visa');
-  const [cardForm, setCardForm] = useState({
-    name: '',
-    number: '',
-    expiry: '',
-    cvv: '',
-  });
+  const [cardForm, setCardForm] = useState({ name: '', number: '', expiry: '', cvv: '' });
+  const [guestEmail, setGuestEmail] = useState('');
   const [processing, setProcessing] = useState(false);
 
-  const subtotal = orderItems.reduce((sum, i) => sum + i.price, 0);
+  // Guard: no digital checkout without an account; nothing to check out with an empty cart.
+  useEffect(() => {
+    if (items.length === 0) {
+      navigate('/cart');
+      return;
+    }
+    if (hasDigitalItem && !user) {
+      navigate('/login', { state: { redirectTo: '/checkout' } });
+    }
+  }, [items.length, hasDigitalItem, user, navigate]);
+
+  const rows = items
+    .map((item) => {
+      const book = getBook(item.bookId);
+      if (!book) return null;
+      const price = item.format === 'digital' ? book.formats.digital?.price : book.formats.physical?.price;
+      if (price === undefined) return null;
+      return { item, book, price };
+    })
+    .filter((r): r is { item: typeof items[number]; book: NonNullable<ReturnType<typeof getBook>>; price: number } => r !== null);
+
+  const subtotal = rows.reduce((sum, r) => sum + r.price * r.item.quantity, 0);
   const tax = subtotal * 0.08;
   const total = subtotal + tax;
+  const isGuest = !user;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { name, value } = e.target;
@@ -31,20 +54,49 @@ export function Checkout() {
   };
 
   const handlePay = () => {
+    if (rows.length === 0) return;
     setProcessing(true);
-    // Simulate payment processing — success ~80% of the time
+
+    const orderItems: OrderItem[] = rows.map((r) => ({
+      bookId: r.book.id,
+      title: r.book.title,
+      author: r.book.author,
+      format: r.item.format,
+      quantity: r.item.quantity,
+      price: r.price,
+    }));
+
+    const order = createOrder({
+      userId: user?.id ?? null,
+      guestEmail: isGuest ? guestEmail : null,
+      items: orderItems,
+      subtotal,
+      tax,
+      total,
+      paymentMethod,
+    });
+
+    // Simulate Pesapal hosted checkout + IPN round trip — success ~80% of the time.
     setTimeout(() => {
       if (Math.random() > 0.2) {
-        navigate('/payment/success', { state: { total, method: paymentMethod } });
+        setOrderStatus(order.id, 'paid');
+        orderItems
+          .filter((i) => i.format === 'physical')
+          .forEach((i) => decrementPhysicalStock(i.bookId, i.quantity));
+        clear();
+        navigate('/payment/success', { state: { orderId: order.id } });
       } else {
-        navigate('/payment/failure');
+        setOrderStatus(order.id, 'failed');
+        navigate('/payment/failure', { state: { orderId: order.id } });
       }
     }, 2400);
   };
 
   const canPay =
-    paymentMethod === 'bank' ||
-    (cardForm.name && cardForm.number.length >= 19 && cardForm.expiry.length === 5 && cardForm.cvv.length >= 3);
+    rows.length > 0 &&
+    (!isGuest || /\S+@\S+\.\S+/.test(guestEmail)) &&
+    (paymentMethod === 'bank' ||
+      (cardForm.name && cardForm.number.length >= 19 && cardForm.expiry.length === 5 && cardForm.cvv.length >= 3));
 
   return (
     <div className="bg-background min-h-screen">
@@ -66,6 +118,24 @@ export function Checkout() {
                 <span className="text-secondary">Secure Payment</span> — Encrypted with 256-bit SSL. Your data is never stored.
               </p>
             </div>
+
+            {isGuest && (
+              <div>
+                <p className="text-xs tracking-wider uppercase text-muted-foreground mb-6">Contact Email</p>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" strokeWidth={1.5} />
+                  <input
+                    value={guestEmail}
+                    onChange={(e) => setGuestEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    className="w-full border border-border bg-card pl-12 pr-4 py-4 text-secondary placeholder:text-muted-foreground/50 focus:outline-none focus:border-secondary transition-colors"
+                  />
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-2">
+                  Guest checkout is available for physical orders. Order status and shipping updates will be sent here.
+                </p>
+              </div>
+            )}
 
             {/* Payment Method Selection */}
             <div>
@@ -168,7 +238,7 @@ export function Checkout() {
                   </div>
                 </div>
                 <button
-                  onClick={() => {}}
+                  onClick={() => navigate('/payment/bank-setup')}
                   className="text-xs text-secondary underline underline-offset-4 tracking-wider"
                 >
                   Link or change bank account →
@@ -201,13 +271,15 @@ export function Checkout() {
             <div className="border border-border p-8 sticky top-32">
               <p className="text-xs tracking-wider uppercase text-muted-foreground mb-8">Order Summary</p>
               <div className="space-y-6 mb-8">
-                {orderItems.map((item) => (
-                  <div key={item.id} className="flex justify-between items-start gap-4">
+                {rows.map(({ item, book, price }) => (
+                  <div key={`${item.bookId}-${item.format}`} className="flex justify-between items-start gap-4">
                     <div>
-                      <p className="text-sm text-secondary">{item.title}</p>
-                      <p className="text-xs text-muted-foreground mt-1">{item.author}</p>
+                      <p className="text-sm text-secondary">{book.title} {item.quantity > 1 && `× ${item.quantity}`}</p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {book.author} · {item.format === 'digital' ? 'Digital' : 'Physical'}
+                      </p>
                     </div>
-                    <p className="text-sm text-secondary shrink-0">${item.price.toFixed(2)}</p>
+                    <p className="text-sm text-secondary shrink-0">${(price * item.quantity).toFixed(2)}</p>
                   </div>
                 ))}
               </div>

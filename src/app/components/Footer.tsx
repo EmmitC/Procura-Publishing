@@ -1,7 +1,18 @@
 import { Link } from 'react-router';
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { useSiteSettings } from '../state/SiteSettingsContext';
 
 export function Footer() {
+  const { settings } = useSiteSettings();
+
+  const socialLinks = [
+    { key: 'instagram', label: 'Instagram', url: settings.social.instagram, Icon: Instagram },
+    { key: 'facebook', label: 'Facebook', url: settings.social.facebook, Icon: Facebook },
+    { key: 'twitter', label: 'Twitter', url: settings.social.twitter, Icon: Twitter },
+    { key: 'linkedin', label: 'LinkedIn', url: settings.social.linkedin, Icon: Linkedin },
+    { key: 'youtube', label: 'YouTube', url: settings.social.youtube, Icon: Youtube },
+  ] as const;
+
   return (
     <footer className="bg-secondary border-t border-border/20">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20">
@@ -58,13 +69,13 @@ export function Footer() {
             <h4 className="text-background text-sm tracking-wider uppercase mb-6">Contact</h4>
             <ul className="space-y-3">
               <li className="text-muted-foreground/60 text-sm">
-                123 Publishing Ave<br />New York, NY 10001
+                {settings.location}
               </li>
               <li className="text-muted-foreground/60 text-sm">
-                (555) 123-4567
+                {settings.phone}
               </li>
               <li className="text-muted-foreground/60 text-sm">
-                info@procura.com
+                {settings.primaryEmail}
               </li>
             </ul>
           </div>
@@ -73,30 +84,18 @@ export function Footer() {
           <div className="md:col-span-3">
             <h4 className="text-background text-sm tracking-wider uppercase mb-6">Follow</h4>
             <div className="flex gap-4">
-              <a
-                href="#"
-                className="text-muted-foreground/60 hover:text-background transition-colors"
-              >
-                <Facebook className="h-5 w-5" strokeWidth={1.5} />
-              </a>
-              <a
-                href="#"
-                className="text-muted-foreground/60 hover:text-background transition-colors"
-              >
-                <Twitter className="h-5 w-5" strokeWidth={1.5} />
-              </a>
-              <a
-                href="#"
-                className="text-muted-foreground/60 hover:text-background transition-colors"
-              >
-                <Instagram className="h-5 w-5" strokeWidth={1.5} />
-              </a>
-              <a
-                href="#"
-                className="text-muted-foreground/60 hover:text-background transition-colors"
-              >
-                <Linkedin className="h-5 w-5" strokeWidth={1.5} />
-              </a>
+              {socialLinks.map(({ key, label, url, Icon }) => (
+                <a
+                  key={key}
+                  href={url || '#'}
+                  target={url ? '_blank' : undefined}
+                  rel={url ? 'noopener noreferrer' : undefined}
+                  aria-label={label}
+                  className={`text-muted-foreground/60 hover:text-background transition-colors ${!url ? 'opacity-30 pointer-events-none' : ''}`}
+                >
+                  <Icon className="h-5 w-5" strokeWidth={1.5} />
+                </a>
+              ))}
             </div>
           </div>
         </div>

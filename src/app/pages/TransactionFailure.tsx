@@ -1,8 +1,10 @@
-import { useNavigate, Link } from 'react-router';
+import { useLocation, useNavigate, Link } from 'react-router';
 import { XCircle, RefreshCw, HelpCircle, ArrowLeft } from 'lucide-react';
 
 export function TransactionFailure() {
   const navigate = useNavigate();
+  const { state } = useLocation() as { state: { orderId?: string } | null };
+  const refCode = state?.orderId ?? `ERR-${Date.now().toString(36).toUpperCase().slice(-6)}`;
 
   return (
     <div className="bg-background min-h-screen">
@@ -64,7 +66,7 @@ export function TransactionFailure() {
           <div>
             <p className="text-sm text-secondary mb-1">Need Assistance?</p>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              If you believe this is an error, contact your card issuer or reach out to our support team. Reference code: <span className="font-mono text-secondary">ERR-{Date.now().toString(36).toUpperCase().slice(-6)}</span>
+              If you believe this is an error, contact your card issuer or reach out to our support team. Reference code: <span className="font-mono text-secondary">{refCode}</span>
             </p>
           </div>
         </div>

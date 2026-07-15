@@ -1,13 +1,16 @@
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
+import { usePeople } from '../state/PeopleContext';
 
 export function About() {
+  const { team } = usePeople();
+
   return (
     <div className="bg-background">
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center border-b border-border">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-32">
           <div className="max-w-5xl">
-            <p className="text-sm tracking-wider uppercase text-muted-foreground mb-6">About DOMINARI</p>
+            <p className="text-sm tracking-wider uppercase text-muted-foreground mb-6">About PROCURA</p>
             <h1 className="text-6xl md:text-7xl lg:text-8xl mb-12 text-secondary leading-[0.95]" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
               Literary Curation<br />for the Discerning<br />Reader
             </h1>
@@ -24,18 +27,18 @@ export function About() {
           <div className="grid lg:grid-cols-2 gap-20 items-start">
             <div className="space-y-6 text-muted-foreground leading-relaxed">
               <p>
-                Founded in 2019 by a collective of literary enthusiasts, editors, and industry veterans, DOMINARI emerged from a single conviction: remarkable manuscripts were being lost in the noise of mass publishing.
+                Founded in 2019 by a collective of literary enthusiasts, editors, and industry veterans, PROCURA emerged from a single conviction: remarkable manuscripts were being lost in the noise of mass publishing.
               </p>
               <p>
                 We witnessed readers struggling to discover their next obsession. Authors disconnected from their audience. Stories chosen for commercial potential alone, not their power to move, challenge, and transform.
               </p>
               <p>
-                DOMINARI was born to bridge these gaps—a publishing house that operates as a literary curator, where every book earns its place through craft, originality, and emotional resonance.
+                PROCURA was born to bridge these gaps—a publishing house that operates as a literary curator, where every book earns its place through craft, originality, and emotional resonance.
               </p>
             </div>
             <div className="relative aspect-[4/5] overflow-hidden">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1648536524290-590fb42a04aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwdWJsaXNoaW5nJTIwYm9va3MlMjBsaWJyYXJ5fGVufDF8fHx8MTc3MjYyMDA5OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="public\community\dominari-community (10).jpg"
                 alt="Publishing library"
                 className="w-full h-full object-cover grayscale"
               />
@@ -117,77 +120,51 @@ export function About() {
       </section>
 
       {/* Team Highlight */}
-      <section className="border-y border-border py-32 bg-card">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-5 gap-12 items-start">
-            <div className="lg:col-span-2">
-              <div className="aspect-[3/4] bg-muted"></div>
+      {team.length > 0 && (
+        <section className="border-y border-border py-32 bg-card">
+          <div className="max-w-7xl mx-auto px-6 lg:px-12 space-y-32">
+            <div className="mb-4">
+              <p className="text-sm tracking-wider uppercase text-muted-foreground mb-4">Behind PROCURA</p>
+              <h2 className="text-4xl md:text-5xl text-secondary" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                Our Team
+              </h2>
             </div>
-            <div className="lg:col-span-3 space-y-6">
-              <div>
-                <h2 className="text-3xl md:text-4xl text-secondary mb-2" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-                  Hood Lubowa
-                </h2>
-                <p className="text-sm tracking-wider uppercase text-muted-foreground">Author & Human Rights Advocate</p>
+            {team.map((member, index) => (
+              <div key={member.id} className="grid lg:grid-cols-5 gap-12 items-start">
+                <div className={`lg:col-span-2 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                  <div className="aspect-[3/4] bg-muted overflow-hidden">
+                    {member.image ? (
+                      <ImageWithFallback src={member.image} alt={member.name} className="w-full h-full object-cover grayscale" />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-muted to-muted/50"></div>
+                    )}
+                  </div>
+                </div>
+                <div className={`lg:col-span-3 space-y-6 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <div>
+                    <h2 className="text-3xl md:text-4xl text-secondary mb-2" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                      {member.name}
+                    </h2>
+                    <p className="text-sm tracking-wider uppercase text-muted-foreground">{member.title}</p>
+                  </div>
+                  {member.bio && (
+                    <div className="space-y-4 text-muted-foreground leading-relaxed">
+                      <p>{member.bio}</p>
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  Hood Lubowa is a Ugandan lawyer, author, and human rights advocate who serves as the Civic Engagement and Digital Rights Lead for Oxfam in Uganda. Since January 2023, he has actively contributed to discussions and initiatives on digital rights, participating in panels throughout Uganda.
-                </p>
-                <p>
-                  In his novel <em>Out of Dust</em>, published by DOMINARI, he explores themes of loss, violence, and intolerance through the character Suru—a narrative that challenges perspectives and enriches understanding.
-                </p>
-                <p>
-                  He holds a Bachelor of Laws (LLB) from Uganda Christian University and has been cited on legal matters related to intellectual property.
-                </p>
-              </div>
-            </div>
-
-            
+            ))}
           </div>
-        </div>
-      </section>
-
-     <section className="border-y border-border py-32 bg-card">
-  <div className="max-w-7xl mx-auto px-6 lg:px-12">
-    <div className="grid lg:grid-cols-5 gap-12 items-start">
-      
-      {/* Text Block First */}
-      <div className="lg:col-span-3 space-y-6">
-        <div>
-          <h2 className="text-3xl md:text-4xl text-secondary mb-2" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-            Hood Lubowa
-          </h2>
-          <p className="text-sm tracking-wider uppercase text-muted-foreground">Author & Human Rights Advocate</p>
-        </div>
-        <div className="space-y-4 text-muted-foreground leading-relaxed">
-          <p>
-            Hood Lubowa is a Ugandan lawyer, author, and human rights advocate who serves as the Civic Engagement and Digital Rights Lead for Oxfam in Uganda. Since January 2023, he has actively contributed to discussions and initiatives on digital rights, participating in panels throughout Uganda.
-          </p>
-          <p>
-            In his novel <em>Out of Dust</em>, published by DOMINARI, he explores themes of loss, violence, and intolerance through the character Suru—a narrative that challenges perspectives and enriches understanding.
-          </p>
-          <p>
-            He holds a Bachelor of Laws (LLB) from Uganda Christian University and has been cited on legal matters related to intellectual property.
-          </p>
-        </div>
-      </div>
-
-      {/* Image Block Second */}
-      <div className="lg:col-span-2">
-        <div className="aspect-[3/4] bg-muted"></div>
-      </div>
-
-    </div>
-  </div>
-</section>
+        </section>
+      )}
 
 
       {/* Call to Action */}
       <section className="py-32">
         <div className="max-w-4xl mx-auto px-6 lg:px-12 text-center">
           <h2 className="text-4xl md:text-5xl text-secondary mb-8" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-            Join the DOMINARI Community
+            Join the PROCURA Community
           </h2>
           <p className="text-lg text-muted-foreground mb-12 leading-relaxed">
             Whether you're a reader seeking your next great book, an author with a story to tell, or a literary professional looking to collaborate, we invite you to be part of our community.
